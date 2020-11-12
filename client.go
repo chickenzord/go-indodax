@@ -28,11 +28,11 @@ func NewDefaultClient(apiKey, secretKey string) *Client {
 }
 
 // CallPrivate generic function to call private Indodax API
-func (c *Client) CallPrivate(method string, params map[string]string) (*http.Response, error) {
+func (c *Client) CallPrivate(method Method, params map[string]string) (*http.Response, error) {
 	// set params
 	ts := time.Now()
 	formParams := url.Values{}
-	formParams.Set("method", method)
+	formParams.Set("method", string(method))
 	formParams.Set("timestamp", strconv.FormatInt(ts.UnixNano()/int64(time.Millisecond), 10))
 	formParams.Set("recvWindow", strconv.FormatInt(ts.Add(c.ReceiveWindow).UnixNano()/int64(time.Millisecond), 10))
 	for key, val := range params {
