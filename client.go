@@ -14,6 +14,7 @@ import (
 // Client Indodax client
 type Client struct {
 	BaseURL       string
+	PublicBaseURL string
 	APIKey        string
 	SecretKey     string
 	ReceiveWindow time.Duration
@@ -23,10 +24,16 @@ type Client struct {
 func NewDefaultClient(apiKey, secretKey string) *Client {
 	return &Client{
 		BaseURL:       "https://indodax.com/tapi",
+		PublicBaseURL: "https://indodax.com/api",
 		APIKey:        apiKey,
 		SecretKey:     secretKey,
 		ReceiveWindow: 5 * time.Second,
 	}
+}
+
+// CallPublic generic function to call public Indodax API
+func (c *Client) CallPublic(path string) (*http.Response, error) {
+	return http.DefaultClient.Get(c.PublicBaseURL + "/" + path)
 }
 
 // CallPrivate generic function to call private Indodax API

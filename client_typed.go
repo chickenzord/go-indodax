@@ -27,7 +27,7 @@ func NewClientFromEnv() *TypedClient {
 
 // GetInfo This method gives user balances and server's timestamp.
 func (c *TypedClient) GetInfo() (*GetInfoResponse, error) {
-	r, err := c.CallPrivate("getInfo", map[string]string{})
+	r, err := c.CallPrivate(MethodGetInfo, map[string]string{})
 	if err != nil {
 		return nil, err
 	}
