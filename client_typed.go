@@ -1,6 +1,9 @@
 package indodax
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"os"
+)
 
 // TypedClient Indodax client with typed responses
 type TypedClient struct {
@@ -12,6 +15,14 @@ func NewDefaultTypedClient(apiKey, secretKey string) *TypedClient {
 	return &TypedClient{
 		Client: *NewDefaultClient(apiKey, secretKey),
 	}
+}
+
+// NewClientFromEnv creates new client from INDODAX_API_KEY and INDODAX_SECRET_KEY
+func NewClientFromEnv() *TypedClient {
+	return NewDefaultTypedClient(
+		os.Getenv("INDODAX_API_KEY"),
+		os.Getenv("INDODAX_SECRET_KEY"),
+	)
 }
 
 // GetInfo This method gives user balances and server's timestamp.

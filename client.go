@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// Client Indodax client
 type Client struct {
 	BaseURL       string
 	APIKey        string
@@ -18,6 +19,7 @@ type Client struct {
 	ReceiveWindow time.Duration
 }
 
+// NewDefaultClient creates new default client
 func NewDefaultClient(apiKey, secretKey string) *Client {
 	return &Client{
 		BaseURL:       "https://indodax.com/tapi",
